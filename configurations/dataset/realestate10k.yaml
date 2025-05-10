@@ -4,7 +4,7 @@
 defaults:
   - base_video
 
-save_dir: data/real-estate-10k
+save_dir: /capstor/store/cscs/swissai/a03/ss24m050/realestate10k 
 external_cond_dim: 16
 max_frames: 8
 frame_skip: 10
