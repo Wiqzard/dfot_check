@@ -62,14 +62,14 @@ diffusion:
 
 # vae
 vae:
-  pretrained_path: null
+  pretrained_path: /home/ss24m050/Documents/phd_playground/data/ckpts/ImageVAE_MCRAFT.ckpt
   pretrained_kwargs: {}
   use_fp16: True
-  batch_size: 2
+  batch_size: 1
 
 checkpoint:
   reset_optimizer: False
-  strict: True
+  strict: False #True
 
 # video generation tasks
 tasks:
@@ -100,6 +100,6 @@ logging:
     - mse
     - psnr
     - ssim
-  metrics_batch_size: 16
+  metrics_batch_size: 4 #16
   sanity_generation: False # generate video samples during sanity check
   raw_dir: null

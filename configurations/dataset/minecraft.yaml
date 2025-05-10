@@ -6,13 +6,26 @@ defaults:
 
 latent:
   suffix: 1cd9pgpb
-save_dir: data/minecraft
-max_frames: 50
+save_dir: /data/cvg/sebastian/minecraft_marsh/dataset #data/minecraft
+max_frames: 25 #50
 frame_skip: 2
 external_cond_stack: true
 external_cond_processing: mask_first
-context_length: 25
+context_length: 5
 resolution: 256
 data_mean: [[[0.557]], [[0.222]], [[0.416]], [[-0.847]]]
 data_std: [[[4.268]], [[4.953]], [[5.722]], [[7.336]]]
 external_cond_dim: 4
+
+
+# python -m main +name=DFoT dataset=minecraft algorithm=dfot_video experiment=video_generation @diffusion/continuous @DiT/B load=pretrained:DFoT_MCRAFT.ckpt 'experiment.tasks=[validation]' 'algorithm.logging.metrics=[fvd]' dataset.n_frames=150 experiment.validation.batch_size=1 dataset.filter_min_len=0 load=pretrained:MODEL_NAME.ckpt
+# python -m main +name=DFoT_HG_t dataset=minecraft algorithm=dfot_video experiment=video_generation @diffusion/continuous @DiT/B load=pretrained:DFoT_MCRAFT.ckpt 'experiment.tasks=[validation]' 'algorithm.logging.metrics=[fvd]' dataset.n_frames=150 experiment.validation.batch_size=1 dataset.filter_min_len=0 algorithm.tasks.prediction.history_guidance.name=temporal '+algorithm.tasks.prediction.history_guidance.hist_subsequences=[all,[-4,-3,-2,-1]]' '+algorithm.tasks.prediction.history_guidance.hist_weights=[0.5, 0.5]' load=pretrained:MODEL_NAME.ckpt
+# python -m main +name=DFoT dataset=realestate10k_ood algorithm=dfot_video_pose experiment=video_generation @diffusion/continuous 'experiment.tasks=[validation]' 'algorithm.logging.metrics=[lpips]' load=pretrained:DFoT_RE10K.ckpt
+# python -m main +name=DFoT_HG_t dataset=realestate10k_ood algorithm=dfot_video_pose experiment=video_generation @diffusion/continuous 'experiment.tasks=[validation]' 'algorithm.logging.metrics=[lpips]' load=pretrained:DFoT_RE10K.ckpt algorithm.tasks.prediction.history_guidance.name=temporal '+algorithm.tasks.prediction.history_guidance.hist_subsequences=[[0, 1, 2], [1, 2, 3]]' '+algorithm.tasks.prediction.history_guidance.hist_weights=[2, 2]' '+algorithm.tasks.prediction.history_guidance.gen_segments=[[0, 1, 2], [1, 2, 3]]'
+
+
+# python -m main +name=DFoT_MCRAFT dataset=minecraft algorithm=dfot_video experiment=video_generation @diffusion/continuous @DiT/B load=/home/ss24m050/Documents/phd_playground/data/ckpts/DFoT_MCRAFT.ckpt
+
+# pretrained:MODEL_NAME.ckpt
+
+

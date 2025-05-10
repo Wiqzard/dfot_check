@@ -9,7 +9,7 @@ dataset:
   latent:
     enable: True
   subdataset_size: 1920000
-  num_eval_videos: 768
+  num_eval_videos: 256 #768
 
 algorithm:
   lr_scheduler:
@@ -34,21 +34,22 @@ algorithm:
     patch_size: 2
     external_cond_dropout: 0.1
   vae:
-    pretrained_path: pretrained:ImageVAE_MCRAFT.ckpt
-    batch_size: 2
+    pretrained_path:  /home/ss24m050/Documents/phd_playground/data/ckpts/ImageVAE_MCRAFT.ckpt
+ #pretrained:ImageVAE_MCRAFT.ckpt
+    batch_size: 1
   logging:
     max_num_videos: 32
 
 experiment:
   training:
     lr: 1e-4
-    batch_size: 8
-    max_epochs: 10
+    batch_size: 2
+    max_epochs: 100
   validation:
-    batch_size: 16
+    batch_size: 2 #16
     data:
       num_workers: 0
   test:
-    batch_size: 16
+    batch_size: 2 #16
     data:
       num_workers: 0
